@@ -34,6 +34,37 @@ A project already exists to have firmware for all printrbots : [printrboardmoder
 The easiest update is to use [a precompiled firmware](https://github.com/Printrbot/printrboardmodernmarlin/blob/master/Simple_Metal/RevFv1.0_Printrbot_Simple_Metal_HB.hex), and follow this guide on [how to flash the firmware using Atmel Flip(windows only)](http://bilbycnc.freshdesk.com/support/solutions/articles/3000053237-re-flashing-the-firmware-printrbot-)
 
 This brings some features (linear advance), but not all (bilinear bed leveling is not set), and the print volume is incorrectly set, so the next step will be to compile the firmware from source, and modifying the Config.h and Config_advance.h files to suit our needs. Again, a good starting point is [the sources from printrbotmodernmarlin](https://github.com/Printrbot/printrboardmodernmarlin/tree/master/Simple_Metal/source) (config files) along with the rest of the [marlin 1.1.9 sources](https://github.com/MarlinFirmware/Marlin).
-Now there is a [doc on how to compile the firmware](https://github.com/Printrbot/printrboardmodernmarlin/wiki)
+Now there is a [doc on how to compile the firmware](https://github.com/Printrbot/printrboardmodernmarlin/wiki).
+Following it, i was able to recompile (on linux) the marlin sources with the config files present on the current repository to produce a hex file.
 
+The hex file is in an hidden folder in your marlin directory (firmware.hex).
+I was able to upload it using atmel flip with success.
+
+## Configuring the printer
+### bilinear bed leveling
+After flashing, i could perform a 5x5 grid bilinear bed leveling with `G29 P5`, which rerurned the following result : 
+
+```
+Bilinear Leveling Grid:
+      0      1      2      3      4
+ 0 +0.589 +0.534 +0.470 +0.375 +0.309
+ 1 +0.375 +0.311 +0.265 +0.192 +0.155
+ 2 +0.098 +0.033 +0.001 -0.037 -0.063
+ 3 -0.117 -0.180 -0.209 -0.225 -0.220
+ 4 -0.259 -0.332 -0.341 -0.319 -0.310
+ ```
+As you can see, my bed is far from flat, and this is why i had a hard time printing on the whole bed without changing the Z offset value.
+With the current settings, the auto bed leveling takes quite some time, i'll reduce the grid, and probably take less measures per probing position (currently 3).
+
+### Extruder PID autotune
+
+`M303 C30 E0 S210 U1` returns :
+```
+ Classic PID
+ Kp: 39.11 Ki: 6.45 Kd: 59.28
+PID Autotune finished! Put the last Kp, Ki and Kd constants from below into Configuration.h
+#define DEFAULT_Kp 39.11
+#define DEFAULT_Ki 6.45
+#define DEFAULT_Kd 59.28
+```
 
