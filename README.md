@@ -17,10 +17,10 @@ It has recieved multiple upgrades :
  
  As you can see i pretty much got all the upgrades that were available. The only one missing was the latest extruder dual gear design that improved on filament traction, but i already had such good results with the first upgrade that i didn't bother (it was a bit expensive too).
  
- The printer features a capacitive Z probe, and use it to do 3 points Z auto bed levelling.
+ The printer features a capacitive Z probe, and use it to do 3 points Z auto bed leveling.
  
 ## Aims of the project
-The hardware is quite good, perhaps some upgrades will come later, but now the worst thing with this printer is it's dated firmware from back then. I want to use the latest marlin firmware to enable bilinear bed levelling (a matrix of points and automated adjustment for the deformations of the bed rather than 3 points to calculate the average slope of the bed).
+The hardware is quite good, perhaps some upgrades will come later, but now the worst thing with this printer is it's dated firmware from back then. I want to use the latest marlin firmware to enable [bilinear bed leveling](http://marlinfw.org/docs/features/auto_bed_leveling.html#types-of-automatic-bed-leveling) (a matrix of points and automated adjustment for the deformations of the bed rather than 3 points to calculate the average slope of the bed).
 While we're at it, i'll also enable linear advance, since it can increase significantly print quality.
 
 ## Hardware updates
@@ -32,4 +32,8 @@ It also lacks a hotend fan header, so i'll have to add a little mosfet module to
 A project already exists to have firmware for all printrbots : [printrboardmodernmarlin
 ](https://github.com/Printrbot/printrboardmodernmarlin). It provides sources and precompiled binaries, so that is a good starting point.
 The easiest update is to use [a precompiled firmware](https://github.com/Printrbot/printrboardmodernmarlin/blob/master/Simple_Metal/RevFv1.0_Printrbot_Simple_Metal_HB.hex), and follow this guide on [how to flash the firmware using Atmel Flip(windows only)](http://bilbycnc.freshdesk.com/support/solutions/articles/3000053237-re-flashing-the-firmware-printrbot-)
+
+This brings some features (linear advance), but not all (bilinear bed leveling is not set), and the print volume is incorrectly set, so the next step will be to compile the firmware from source, and modifying the Config.h and Config_advance.h files to suit our needs. Again, a good starting point is [the sources from printrbotmodernmarlin](https://github.com/Printrbot/printrboardmodernmarlin/tree/master/Simple_Metal/source) (config files) along with the rest of the [marlin 1.1.9 sources](https://github.com/MarlinFirmware/Marlin).
+Now there is a [doc on how to compile the firmware](https://github.com/Printrbot/printrboardmodernmarlin/wiki)
+
 
