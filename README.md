@@ -27,3 +27,9 @@ While we're at it, i'll also enable linear advance, since it can increase signif
 The mainboard support is still possible, but this architecture is not so common, and it's still a 8 bit AVR. Plus it has integrated stepper drivers, meaning that we can't use the fancy trinamic silent stepper drivers with sensorless homing and all the jazz.
 It does not have an LCD or any buttons to control it, so it will probably be the first update, on the current mainboard.
 It also lacks a hotend fan header, so i'll have to add a little mosfet module to control the hotend fan from a GPIO rather than having it spinning constantly.
+
+## Updating the firmware
+A project already exists to have firmware for all printrbots : [printrboardmodernmarlin
+](https://github.com/Printrbot/printrboardmodernmarlin). It provides sources and precompiled binaries, so that is a good starting point.
+The easiest update is to use [a precompiled firmware](https://github.com/Printrbot/printrboardmodernmarlin/blob/master/Simple_Metal/RevFv1.0_Printrbot_Simple_Metal_HB.hex), and follow this guide on [how to flash the firmware using Atmel Flip(windows only)](http://bilbycnc.freshdesk.com/support/solutions/articles/3000053237-re-flashing-the-firmware-printrbot-)
+
